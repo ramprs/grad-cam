@@ -1,0 +1,3 @@
+models/
+output/
+!models/download_models.sh
