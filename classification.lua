@@ -3,7 +3,7 @@ require 'nn'
 require 'lfs'
 require 'image'
 require 'loadcaffe'
-utils = require 'utils'
+utils = require 'misc.utils'
 
 cmd = torch.CmdLine()
 cmd:text('Options')
@@ -12,7 +12,7 @@ cmd:text('Options')
 cmd:option('-proto_file', 'models/VGG_ILSVRC_16_layers_deploy.prototxt')
 cmd:option('-model_file', 'models/VGG_ILSVRC_16_layers.caffemodel')
 cmd:option('-input_sz', 224, 'Input image dimensions (use 227 for AlexNet)')
-cmd:option('-backend', 'cudnn')
+cmd:option('-backend', 'nn')
 
 -- Grad-CAM parameters
 cmd:option('-layer_name', 'relu5_3', 'Layer to use for Grad-CAM (use relu5_4 for VGG-19 and relu5 for AlexNet)')

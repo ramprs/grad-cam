@@ -14,7 +14,7 @@ end
 
 -- Replace ReLUs with DeconvReLUs
 function utils.deconv(m)
-  require 'DeconvReLU'
+  require 'misc.DeconvReLU'
   local name = torch.typename(m)
   if name == 'nn.ReLU' or name == 'cudnn.ReLU' then
     return nn.DeconvReLU()
@@ -25,7 +25,7 @@ end
 
 -- Replace ReLUs with DeconvReLUs
 function utils.guidedbackprop(m)
-  require 'GuidedBackpropReLU'
+  require 'misc.GuidedBackpropReLU'
   local name = torch.typename(m)
   if name == 'nn.ReLU' or name == 'cudnn.ReLU' then
     return nn.GuidedBackpropReLU()
