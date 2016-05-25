@@ -1,5 +1,6 @@
 require 'torch'
 require 'nn'
+require 'lfs'
 require 'image'
 require 'loadcaffe'
 utils = require 'utils'
@@ -29,6 +30,7 @@ print(opt)
 
 torch.manualSeed(opt.seed)
 torch.setdefaulttensortype('torch.FloatTensor')
+lfs.mkdir(opt.out_path)
 
 if opt.gpuid >= 0 then
   require 'cunn'
@@ -38,46 +40,42 @@ if opt.gpuid >= 0 then
 end
 
 -- Load CNN
-cnn = loadcaffe.load(opt.proto_file, opt.model_file, opt.backend)
--- cnn = loadcaffe.load(opt.proto_file, opt.model_file, 'nn')
-
--- Get layer number corresponding to name
-layer_id = utils.cnn_layer_id(cnn, opt.layer_name)
-assert(layer_id ~= -1, 'incorrect layer name')
+local cnn = loadcaffe.load(opt.proto_file, opt.model_file, opt.backend)
 
 -- Set to evaluate and remove softmax layer
 cnn:evaluate()
 cnn:remove()
 
 -- Clone & replace ReLUs for Guided Backprop
-cnn_gb = cnn:clone()
+local cnn_gb = cnn:clone()
 cnn_gb:replace(utils.guidedbackprop)
 
 -- Load image
 img = utils.preprocess(opt.input_image_path, opt.input_sz, opt.input_sz)
 
-weight = cnn:get(1).weight
-weight_clone = weight:clone()
-nchannels = weight:size(2)
-for i=1,nchannels do
-  weight:select(2,i):copy(weight_clone:select(2,nchannels+1-i))
-end
-weight:mul(255)
-
+-- Transfer to GPU
 if opt.gpuid >= 0 then
   cnn:cuda()
   cnn_gb:cuda()
   img = img:cuda()
 end
 
+-- Forward pass
 output = cnn:forward(img)
 output_gb = cnn_gb:forward(img)
 
 -- Set gradInput
-doutput = cnn.output:clone()
-doutput:fill(0)
-doutput[243] = 1
+local doutput = utils.create_grad_input(cnn.modules[#cnn.modules], opt.label)
 
-grad_cam = utils.grad_cam(cnn, img, doutput, opt.layer_name)
+-- Grad-CAM
+gcam = utils.grad_cam(cnn, opt.layer_name, doutput)
+gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
+image.save(opt.out_path .. 'classify_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gcam))
 
-image.save(opt.out_path .. 'map_243.png', image.toDisplayTensor(grad_cam))
+-- Guided Backprop
+gb_viz = cnn_gb:backward(img, doutput)
+image.save(opt.out_path .. 'classify_gb_' .. opt.label .. '.png', image.toDisplayTensor(gb_viz))
+
+-- Guided Grad-CAM
+gb_gcam = gb_viz:float():cmul(gcam:expandAs(gb_viz))
+image.save(opt.out_path .. 'classify_gb_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gb_gcam))
