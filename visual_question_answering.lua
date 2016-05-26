@@ -15,7 +15,7 @@ cmd:option('-input_sz', 224, 'Input image dimensions (use 227 for AlexNet)')
 cmd:option('-backend', 'cudnn')
 
 -- Grad-CAM parameters
-cmd:option('-layer_name', 'relu5_3', 'Layer to use for Grad-CAM (use relu5_4 for VGG-19 and relu5 for AlexNet)')
+cmd:option('-layer_name', 'relu5_4', 'Layer to use for Grad-CAM (use relu5_3 for VGG-16 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
 cmd:option('-question', 'What animal?', 'Input question')
 cmd:option('-answer', 'cat', 'Answer to generate Grad-CAM for')
