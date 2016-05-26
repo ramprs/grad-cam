@@ -1,0 +1,3 @@
+[submodule "VQA_LSTM_CNN"]
+	path = VQA_LSTM_CNN
+	url = git@github.com:VT-vision-lab/VQA_LSTM_CNN.git

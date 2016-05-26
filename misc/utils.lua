@@ -48,7 +48,7 @@ end
 
 -- Synthesize gradInput tensor
 function utils.create_grad_input(module, label)
-  local doutput = module.output:clone()
+  local doutput = module.output:clone():view(-1)
   doutput:fill(0)
   doutput[label] = 1
   return doutput
@@ -83,6 +83,14 @@ function utils.grad_cam(cnn, layer_name, doutput)
   map = map:cmul(torch.gt(map,0))
 
   return map
+end
+
+function utils.table_invert(t)
+  local s = {}
+  for k,v in pairs(t) do
+    s[v] = k
+  end
+  return s
 end
 
 return utils
