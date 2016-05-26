@@ -4,12 +4,24 @@ local utils = {}
 function utils.preprocess(path, width, height)
   local width = width or 224
   local height = height or 224
-  local img = image.scale(image.load(path), width, height):double()
+
+	-- get the dimensions of the original image
+	local orig_image = image.load(path)
+
+	-- if the image is grayscale, repeat the tensor
+	if orig_image:nDimension() == 2 then
+		orig_image = orig_image:repeatTensor(3, 1, 1)
+	end
+
+	local im_height = orig_image:size(2)
+	local im_width = orig_image:size(3)
+
+  local img = image.scale(orig_image, width, height):double()
   local mean_pixel = torch.DoubleTensor({103.939, 116.779, 123.68})
   img = img:index(1, torch.LongTensor{3, 2, 1}):mul(255.0)
   mean_pixel = mean_pixel:view(3, 1, 1):expandAs(img)
   img:add(-1, mean_pixel)
-  return img
+  return img, im_height, im_width
 end
 
 -- Replace ReLUs with DeconvReLUs
