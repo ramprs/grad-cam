@@ -70,7 +70,8 @@ local doutput = utils.create_grad_input(cnn.modules[#cnn.modules], opt.label)
 -- Grad-CAM
 local gcam = utils.grad_cam(cnn, opt.layer_name, doutput)
 gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
-image.save(opt.out_path .. 'classify_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gcam))
+local hm = utils.to_heatmap(gcam)
+image.save(opt.out_path .. 'classify_gcam_' .. opt.label .. '.png', image.toDisplayTensor(hm))
 
 -- Guided Backprop
 local gb_viz = cnn_gb:backward(img, doutput)

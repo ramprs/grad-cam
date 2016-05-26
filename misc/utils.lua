@@ -93,4 +93,28 @@ function utils.table_invert(t)
   return s
 end
 
+function utils.to_heatmap(map)
+  map = image.toDisplayTensor(map)
+  local cmap = torch.Tensor(3, map:size(2), map:size(3)):fill(1)
+  for i = 1, map:size(2) do
+    for j = 1, map:size(3) do
+      local value = map[1][i][j]
+      if value <= 0.25 then
+        cmap[1][i][j] = 0
+        cmap[2][i][j] = 4*value
+      elseif value <= 0.5 then
+        cmap[1][i][j] = 0
+        cmap[3][i][j] = 2 - 4*value
+      elseif value <= 0.75 then
+        cmap[1][i][j] = 4*value - 2
+        cmap[3][i][j] = 0
+      else
+        cmap[2][i][j] = 4 - 4*value
+        cmap[3][i][j] = 0
+      end
+    end
+  end
+  return cmap
+end
+
 return utils

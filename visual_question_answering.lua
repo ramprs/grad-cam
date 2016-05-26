@@ -182,18 +182,19 @@ print("Grad-CAM answer: ", opt.answer)
 local doutput = utils.create_grad_input(multimodal_net.modules[#multimodal_net.modules], answer_idx)
 
 -- Multimodal backward
-tmp = multimodal_net:backward({tv_q, fv_im}, doutput:view(1,-1))
+local tmp = multimodal_net:backward({tv_q, fv_im}, doutput:view(1,-1))
 local dcnn = tmp[2]
 
 -- Grad-CAM
-gcam = utils.grad_cam(cnn, opt.layer_name, dcnn)
+local gcam = utils.grad_cam(cnn, opt.layer_name, dcnn)
 gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
-image.save(opt.out_path .. 'vqa_gcam_' .. opt.answer .. '.png', image.toDisplayTensor(gcam))
+local hm = utils.to_heatmap(gcam)
+image.save(opt.out_path .. 'vqa_gcam_' .. opt.answer .. '.png', image.toDisplayTensor(hm))
 
 -- Guided Backprop
-gb_viz = cnn_gb:backward(img, dcnn)
+local gb_viz = cnn_gb:backward(img, dcnn)
 image.save(opt.out_path .. 'vqa_gb_' .. opt.answer .. '.png', image.toDisplayTensor(gb_viz))
 
 -- Guided Grad-CAM
-gb_gcam = gb_viz:float():cmul(gcam:expandAs(gb_viz))
+local gb_gcam = gb_viz:float():cmul(gcam:expandAs(gb_viz))
 image.save(opt.out_path .. 'vqa_gb_gcam_' .. opt.answer .. '.png', image.toDisplayTensor(gb_gcam))

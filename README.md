@@ -25,13 +25,27 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 - `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
 - `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
 
+#### Examples
+
+![](http://i.imgur.com/OAoSQYT.png)
+![](http://i.imgur.com/iZuijZy.png)
+![](http://i.imgur.com/o7RStQm.png)
+
+'boxer' (243)
+
+![](http://i.imgur.com/OAoSQYT.png)
+![](http://i.imgur.com/NzXRy5E.png)
+![](http://i.imgur.com/fP0Dd87.png)
+
+'tiger cat' (283)
+
 ### Visual Question Answering
 
 Clone the [VQA][5] ([http://arxiv.org/abs/1505.00468][4]) sub-repository (`git submodule init && git submodule update`), and download and unzip the provided extracted features and pretrained model.
 
 ```
-th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 'What animal?' -answer 'cat' -gpuid 0
 th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 'What animal?' -answer 'dog' -gpuid 0
+th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 'What animal?' -answer 'cat' -gpuid 0
 
 ```
 
@@ -48,6 +62,32 @@ th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 
 - `model_path`: Path to VQA model checkpoint. Default is `VQA_LSTM_CNN/lstm.t7`.
 - `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
 - `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
+
+#### Examples
+
+![](http://i.imgur.com/OAoSQYT.png)
+![](http://i.imgur.com/QBTstax.png)
+![](http://i.imgur.com/NRyhfdL.png)
+
+What animal? Dog
+
+![](http://i.imgur.com/OAoSQYT.png)
+![](http://i.imgur.com/hqBWRAm.png)
+![](http://i.imgur.com/lwj5oAX.png)
+
+What animal? Cat
+
+![](http://i.imgur.com/CUIiOrd.png)
+![](http://i.imgur.com/6oS8lQp.png)
+![](http://i.imgur.com/1za35Sj.png)
+
+What color is the hydrant? Yellow
+
+![](http://i.imgur.com/CUIiOrd.png)
+![](http://i.imgur.com/UY8moms.png)
+![](http://i.imgur.com/DDsMv7A.png)
+
+What color is the hydrant? Green
 
 ### Image Captioning
 
