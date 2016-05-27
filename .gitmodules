@@ -1,3 +1,6 @@
 [submodule "VQA_LSTM_CNN"]
 	path = VQA_LSTM_CNN
 	url = git@github.com:VT-vision-lab/VQA_LSTM_CNN.git
+[submodule "neuraltalk2"]
+	path = neuraltalk2
+	url = git@github.com:karpathy/neuraltalk2.git

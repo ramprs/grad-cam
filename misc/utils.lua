@@ -68,17 +68,39 @@ function utils.create_grad_input(module, label)
   return doutput
 end
 
--- Generate Grad-CAM
-function utils.grad_cam(cnn, layer_name, doutput)
-  -- Split model into two
-  local model1, model2 = nn.Sequential(), nn.Sequential()
-  for i = 1, #cnn.modules do
-    model1:add(cnn:get(i))
-    layer_id = i
-    if cnn:get(i).name == layer_name then
-      break
+function utils.create_grad_input_lm(input, labels)
+    local output = torch.zeros(input:size()):fill(0)
+    for t =1,labels:size(1) do
+        if labels[t][1]~=0 then
+            output[t+1][1][labels[t][1]] = 1
+        end
     end
+    return output
+end
+
+-- Generate Grad-CAM
+function utils.grad_cam(cnn, layer_name, doutput, ReLU_grad)
+  -- Split model into two
+  
+  local model1, model2 = nn.Sequential(), nn.Sequential()
+  if type(layer_name) == "string" then
+ 	 for i = 1, #cnn.modules do
+    	model1:add(cnn:get(i))
+    	layer_id = i
+    	if cnn:get(i).name == layer_name then
+      	break
+   	 	end
+  	 end
+  else
+	layer_id = layer_name
+  	for i = 1, #cnn.modules do
+	    model1:add(cnn:get(i))
+	 	if i == layer_id then
+	  		break
+	  	end
+  	end
   end
+  
   for i = layer_id+1, #cnn.modules do
     model2:add(cnn:get(i))
   end
@@ -88,7 +110,9 @@ function utils.grad_cam(cnn, layer_name, doutput)
   model2:backward(model1.output, doutput)
   local activations = model1.output
   local gradients = model2.gradInput
-
+  ReLU_grad = ReLU_grad or false
+  if ReLU_grad == true then gradients = gradients:cmul(torch.gt(gradients,0)) end
+ 
   -- Global average pool gradients
   local weights = torch.sum(gradients:view(activations:size(1), -1), 2)
 
@@ -105,6 +129,22 @@ function utils.table_invert(t)
     s[v] = k
   end
   return s
+end
+
+function utils.sent_to_label(vocab, sent, seq_length)
+
+	local inv_vocab = utils.table_invert(vocab)
+	local labels = torch.zeros(seq_length,1)
+	local i =0
+	for word in sent:gmatch'%w+' do
+	  	local ix_word = inv_vocab[word]
+		if ix_word ==nil then print("error: word ".. word " doesn't exist in vocab")
+		  	break
+		end
+		i = i+1
+		labels[{{i},{1}}] = ix_word
+	end
+	return labels
 end
 
 function utils.to_heatmap(map)
