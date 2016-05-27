@@ -116,7 +116,7 @@ function utils.grad_cam(cnn, layer_name, doutput)
 
   -- Summing and rectifying weighted activations across depth
   local map = torch.sum(torch.cmul(activations, weights:view(activations:size(1), 1, 1):expandAs(activations)), 1)
-  map = map:cmul(torch.gt(map,0))
+  map = map:cmul(torch.gt(map,0):typeAs(map))
 
   return map
 end

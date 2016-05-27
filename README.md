@@ -24,7 +24,7 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 - `label`: Class label to generate grad-CAM for. Default is 243 (283 = Tiger cat, 243 = Boxer). These correspond to ILSVRC synset IDs.
 - `out_path`: Path to save images in. Default is `output/`.
 - `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
-- `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
+- `backend`: Backend to use with [loadcaffe][3]. Default is `nn`.
 
 #### Examples
 
