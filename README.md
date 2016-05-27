@@ -104,7 +104,7 @@ local LSTM = require 'neuraltalk2.misc.LSTM'
 
 
 ```
-th captioning.lua -input_image_path images/cat_dog.jpg -caption 'a dog with a cat' -gpuid 0
+th captioning.lua -input_image_path images/cat_dog.jpg -caption 'a dog and cat posing for a picture' -gpuid 0
 th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 
 ```
@@ -122,14 +122,14 @@ th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 #### Examples
 
 ![](http://i.imgur.com/OAoSQYT.png)
-![](http://i.imgur.com/nRYCRd8.png)
-![](http://i.imgur.com/vHyFqJi.png)
+![](http://i.imgur.com/TiKdMMw.png)
+![](http://i.imgur.com/GSQeR2M.png)
 
 a dog and cat posing for a picture
 
 ![](http://i.imgur.com/gE6VXql.png)
-![](http://i.imgur.com/AsYkclC.png)
-![](http://i.imgur.com/eg9YpzD.png)
+![](http://i.imgur.com/K3E9TWS.png)
+![](http://i.imgur.com/em2oHRy.png)
 
 a bathroom with a toilet and a sink
 
