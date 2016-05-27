@@ -92,11 +92,20 @@ What color is the hydrant? Green
 
 ### Image Captioning
 
-Clone the [neuraltalk2][6] sub-repository. Running sh models/download_models.sh will download the pretrained model and place it in the neuraltalk2 folder
+Clone the [neuraltalk2][6] sub-repository. Running `sh models/download_models.sh` will download the pretrained model and place it in the neuraltalk2 folder.
+
+Change lines 2-4 of `neuraltalk2/misc/LanguageModel.lua` to the following:
 
 ```
-th captioning.lua -input_image_path images/cat_dog.jpg -sentence 'a dog with a cat' -gpuid 0
-th captioning.lua -input_image_path images/cat_dog.jpg -sentence '' -gpuid 0
+local utils = require 'neuraltalk2.misc.utils'
+local net_utils = require 'neuraltalk2.misc.net_utils'
+local LSTM = require 'neuraltalk2.misc.LSTM'
+```
+
+
+```
+th captioning.lua -input_image_path images/cat_dog.jpg -caption 'a dog with a cat' -gpuid 0
+th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 
 ```
 #### Options
@@ -104,7 +113,7 @@ th captioning.lua -input_image_path images/cat_dog.jpg -sentence '' -gpuid 0
 - `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`.
 - `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
 - `layer`: Layer to use for Grad-CAM. Default is 30 (relu5_3 for vgg16)
-- `sentence`: Input sentence. Default is the generated caption for the image.
+- `caption`: Input sentence. Default is the generated caption for the image.
 - `out_path`: Path to save images in. Default is `output/`.
 - `model_path`: Path to captioning model checkpoint. Default is `neuraltalk2/model_id1-501-1448236541.t7`.
 - `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
@@ -115,11 +124,13 @@ th captioning.lua -input_image_path images/cat_dog.jpg -sentence '' -gpuid 0
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/nRYCRd8.png)
 ![](http://i.imgur.com/vHyFqJi.png)
+
 a dog and cat posing for a picture
 
 ![](http://i.imgur.com/gE6VXql.png)
 ![](http://i.imgur.com/AsYkclC.png)
 ![](http://i.imgur.com/eg9YpzD.png)
+
 a bathroom with a toilet and a sink
 
 ## License
@@ -130,6 +141,3 @@ BSD
 [4]: http://arxiv.org/abs/1505.00468
 [5]: https://github.com/VT-vision-lab/VQA_LSTM_CNN
 [6]: https://github.com/karpathy/neuraltalk2 
-=======
-# grad-cam
-Gradient based Localization and Visualization
