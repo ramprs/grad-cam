@@ -83,7 +83,8 @@ end
 function utils.grad_cam(cnn, layer_name, doutput)
   -- Split model into two
   local model1, model2 = nn.Sequential(), nn.Sequential()
-  if type(layer_name) == "string" then
+  if tonumber(layer_name) == nil then
+
    for i = 1, #cnn.modules do
       model1:add(cnn:get(i))
       layer_id = i
@@ -92,10 +93,11 @@ function utils.grad_cam(cnn, layer_name, doutput)
       end
     end
   else
-    layer_id = layer_name
+
+    layer_id = tonumber(layer_name)
     for i = 1, #cnn.modules do
       model1:add(cnn:get(i))
-    if i == layer_id then
+      if i == layer_id then
         break
       end
     end
@@ -108,8 +110,10 @@ function utils.grad_cam(cnn, layer_name, doutput)
   -- Get activations and gradients
   model2:zeroGradParameters()
   model2:backward(model1.output, doutput)
-  local activations = model1.output
-  local gradients = model2.gradInput
+  
+  -- Get the activations from model1 and and gradients from model2
+  local activations = model1.output:squeeze()
+  local gradients = model2.gradInput:squeeze()
 
   -- Global average pool gradients
   local weights = torch.sum(gradients:view(activations:size(1), -1), 2)
