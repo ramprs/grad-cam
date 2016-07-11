@@ -1,5 +1,5 @@
 
-# Grad-CAM: Gradient-based Discriminative Localization & Visualization
+# Grad-CAM: Gradient-weighted Class Activation Mapping
 
 ![Overview](http://i.imgur.com/qBPR3aM.jpg)
 
