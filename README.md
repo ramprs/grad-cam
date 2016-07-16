@@ -137,6 +137,11 @@ a bathroom with a toilet and a sink
 
 BSD
 
+### 3rd-party
+
+- [VQA_LSTM_CNN][5], BSD
+- [neuraltalk2][6], BSD
+
 [3]: https://github.com/szagoruyko/loadcaffe
 [4]: http://arxiv.org/abs/1505.00468
 [5]: https://github.com/VT-vision-lab/VQA_LSTM_CNN
