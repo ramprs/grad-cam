@@ -172,7 +172,8 @@ _, pred = torch.max(scores:double(), 2)
 answer = json_file['ix_to_ans'][tostring(pred[{1, 1}])]
 
 local inv_vocab = utils.table_invert(json_file['ix_to_ans'])
-if opt.answer ~= '' then answer_idx = inv_vocab[opt.answer] else opt.answer = answer answer_idx = inv_vocab[answer] end
+-- Replace out of vocabulary answers with predicted answer
+if opt.answer ~= '' and inv_vocab[opt.answer] ~= nil then answer_idx = inv_vocab[opt.answer] else opt.answer = answer answer_idx = inv_vocab[answer] end
 
 print("Question: ", opt.question)
 print("Predicted answer: ", answer)

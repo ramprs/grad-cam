@@ -132,12 +132,13 @@ end
 function utils.sent_to_label(vocab, sent, seq_length)
   local inv_vocab = utils.table_invert(vocab)
   local labels = torch.zeros(seq_length,1)
-  local i =0
+  local i = 0
   for word in sent:gmatch'%w+' do
-    local ix_word = inv_vocab[word]
-    if ix_word == nil then print("error: word ".. word " doesn't exist in vocab")
-      break
+    -- we replace out of vocabulary words with UNK
+    if inv_vocab[word] == nil then
+        word = 'UNK'
     end
+    local ix_word = inv_vocab[word]
     i = i+1
     labels[{{i},{1}}] = ix_word
   end
