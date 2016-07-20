@@ -194,6 +194,8 @@ image.save(opt.out_path .. 'vqa_gcam_' .. opt.answer .. '.png', image.toDisplayT
 
 -- Guided Backprop
 local gb_viz = cnn_gb:backward(img, dcnn)
+-- BGR to RGB
+gb_viz = gb_viz:index(1, torch.LongTensor{3, 2, 1})
 image.save(opt.out_path .. 'vqa_gb_' .. opt.answer .. '.png', image.toDisplayTensor(gb_viz))
 
 -- Guided Grad-CAM

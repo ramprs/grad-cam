@@ -75,6 +75,8 @@ image.save(opt.out_path .. 'classify_gcam_' .. opt.label .. '.png', image.toDisp
 
 -- Guided Backprop
 local gb_viz = cnn_gb:backward(img, doutput)
+-- BGR to RGB
+gb_viz = gb_viz:index(1, torch.LongTensor{3, 2, 1})
 image.save(opt.out_path .. 'classify_gb_' .. opt.label .. '.png', image.toDisplayTensor(gb_viz))
 
 -- Guided Grad-CAM
