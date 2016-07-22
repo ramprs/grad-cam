@@ -8,9 +8,11 @@ function utils.preprocess(path, width, height)
   -- load image
   local orig_image = image.load(path)
 
-  -- if the image is grayscale, repeat the tensor
-  if orig_image:nDimension() == 2 then
+  -- handle greyscale and rgba images
+  if orig_image:size(1) == 1 then
     orig_image = orig_image:repeatTensor(3, 1, 1)
+  elseif orig_image:size(1) == 4 then
+    orig_image = orig_image[{{1,3},{},{}}]
   end
 
   -- get the dimensions of the original image
