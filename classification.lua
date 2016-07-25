@@ -17,7 +17,7 @@ cmd:option('-backend', 'nn')
 -- Grad-CAM parameters
 cmd:option('-layer_name', 'relu5_3', 'Layer to use for Grad-CAM (use relu5_4 for VGG-19 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
-cmd:option('-label', 243, 'Class label to generate grad-CAM for (283 = Tiger cat, 243 = Boxer)')
+cmd:option('-label',-1, 'Class label to generate grad-CAM for (283 = Tiger cat, 243 = Boxer)')
 
 -- Miscellaneous
 cmd:option('-seed', 123, 'Torch manual random number generator seed')
@@ -63,6 +63,14 @@ end
 -- Forward pass
 local output = cnn:forward(img)
 local output_gb = cnn_gb:forward(img)
+
+-- Take argmax
+local score, pred_label = torch.max(output,1)
+
+if opt.label == -1 then 
+  print("No label provided, using predicted label ", pred_label:float())
+  opt.label = pred_label[1]
+end
 
 -- Set gradInput
 local doutput = utils.create_grad_input(cnn.modules[#cnn.modules], opt.label)
