@@ -115,9 +115,9 @@ local gcam = utils.grad_cam(cnn, opt.layer, dcnn)
 gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
 local hm = utils.to_heatmap(gcam)
 if opt.save_as_heatmap == 1 then
-  image.save(opt.out_path .. 'vqa_gcam_hm_' .. opt.label .. '.png', image.toDisplayTensor(hm))
+  image.save(opt.out_path .. 'vqa_gcam_hm_' .. opt.caption .. '.png', image.toDisplayTensor(hm))
 else
-  image.save(opt.out_path .. 'vqa_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gcam))
+  image.save(opt.out_path .. 'vqa_gcam_' .. opt.caption .. '.png', image.toDisplayTensor(gcam))
 end
 
 -- Guided Backprop
