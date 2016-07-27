@@ -18,7 +18,7 @@ cmd:option('-backend', 'nn')
 cmd:option('-layer_name', 'relu5_3', 'Layer to use for Grad-CAM (use relu5_4 for VGG-19 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
 cmd:option('-label',-1, 'Class label to generate grad-CAM for (-1 = use predicted class, 283 = Tiger cat, 243 = Boxer)')
-cmd:option('-save_as_heatmap', 1, '-1 = Save raw GrayScale Grad-CAM, 1 = convert Grad-CAM to  heatmap')
+cmd:option('-save_as_heatmap', 1, 'Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM.')
 
 -- Miscellaneous
 cmd:option('-seed', 123, 'Torch manual random number generator seed')
@@ -68,7 +68,7 @@ local output_gb = cnn_gb:forward(img)
 -- Take argmax
 local score, pred_label = torch.max(output,1)
 
-if opt.label == -1 then 
+if opt.label == -1 then
   print("No label provided, using predicted label ", pred_label)
   opt.label = pred_label[1]
 end

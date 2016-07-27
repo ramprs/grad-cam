@@ -18,8 +18,8 @@ cmd:option('-backend', 'cudnn')
 cmd:option('-layer_name', 'relu5_4', 'Layer to use for Grad-CAM (use relu5_3 for VGG-16 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
 cmd:option('-question', 'What animal?', 'Input question')
-cmd:option('-answer', '', 'Optional answer (For eg. cat) to generate Grad-CAM visualizations for. Default is the predicted answer')
-cmd:option('-save_as_heatmap', 1, '-1: save raw Grad-CAM. 1: convert Grad-CAM to heatmap')
+cmd:option('-answer', '', 'Optional answer (For eg. "cat") to generate Grad-CAM for ("" = use predicted answer).')
+cmd:option('-save_as_heatmap', 1, 'Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM.')
 
 -- VQA model parameters
 cmd:option('-model_path', 'VQA_LSTM_CNN/lstm.t7', 'Path to VQA model checkpoint')

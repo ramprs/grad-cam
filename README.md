@@ -21,10 +21,11 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 - `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`.
 - `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
 - `layer_name`: Layer to use for Grad-CAM. Default is `relu5_3` (use `relu5_4` for VGG-19 and `relu5` for AlexNet).
-- `label`: Class label to generate grad-CAM for. Default is -1 (-1 = Use predicted Class, 283 = Tiger cat, 243 = Boxer). These correspond to ILSVRC synset IDs.
+- `label`: Class label to generate grad-CAM for (-1 = use predicted class, 283 = Tiger cat, 243 = Boxer). Default is -1. These correspond to ILSVRC synset IDs.
 - `out_path`: Path to save images in. Default is `output/`.
 - `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
 - `backend`: Backend to use with [loadcaffe][3]. Default is `nn`.
+- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
 
 #### Examples
 
@@ -58,11 +59,12 @@ th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 
 - `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
 - `layer_name`: Layer to use for Grad-CAM. Default is `relu5_4` (use `relu5_3` for VGG-16 and `relu5` for AlexNet).
 - `question`: Input question. Default is `What animal?`.
-- `answer`: Optional answer to generate grad-CAM for. Default is 'cat'. If answer is not given ('') then it takes the predicted answer).
+- `answer`: Optional answer (For eg. "cat") to generate Grad-CAM for ('' = use predicted answer). Default is ''.
 - `out_path`: Path to save images in. Default is `output/`.
 - `model_path`: Path to VQA model checkpoint. Default is `VQA_LSTM_CNN/lstm.t7`.
 - `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
 - `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
+- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
 
 #### Examples
 
@@ -113,11 +115,12 @@ th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 - `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`.
 - `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
 - `layer`: Layer to use for Grad-CAM. Default is 30 (relu5_3 for vgg16)
-- `caption`: Optional Input sentence. Default is the generated caption for the image.
+- `caption`: Optional input caption. No input will use the generated caption as default.
 - `out_path`: Path to save images in. Default is `output/`.
 - `model_path`: Path to captioning model checkpoint. Default is `neuraltalk2/model_id1-501-1448236541.t7`.
 - `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
 - `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
+- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
 
 #### Examples
 
