@@ -18,7 +18,8 @@ cmd:option('-backend', 'cudnn')
 cmd:option('-layer_name', 'relu5_4', 'Layer to use for Grad-CAM (use relu5_3 for VGG-16 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
 cmd:option('-question', 'What animal?', 'Input question')
-cmd:option('-answer', 'cat', 'Optional answer to generate Grad-CAM visualizations for. Default ('') uses the predicted answer')
+cmd:option('-answer', '', 'Optional answer (For eg. cat) to generate Grad-CAM visualizations for. Default is the predicted answer')
+cmd:option('-save_as_heatmap', 1, '-1: save raw Grad-CAM. 1: convert Grad-CAM to heatmap')
 
 -- VQA model parameters
 cmd:option('-model_path', 'VQA_LSTM_CNN/lstm.t7', 'Path to VQA model checkpoint')
@@ -190,7 +191,11 @@ local dcnn = tmp[2]
 local gcam = utils.grad_cam(cnn, opt.layer_name, dcnn)
 gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
 local hm = utils.to_heatmap(gcam)
-image.save(opt.out_path .. 'vqa_gcam_' .. opt.answer .. '.png', image.toDisplayTensor(hm))
+if opt.save_as_heatmap == 1 then
+  image.save(opt.out_path .. 'vqa_gcam_hm_' .. opt.label .. '.png', image.toDisplayTensor(hm))
+else
+  image.save(opt.out_path .. 'vqa_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gcam))
+end
 
 -- Guided Backprop
 local gb_viz = cnn_gb:backward(img, dcnn)

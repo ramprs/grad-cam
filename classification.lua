@@ -18,6 +18,7 @@ cmd:option('-backend', 'nn')
 cmd:option('-layer_name', 'relu5_3', 'Layer to use for Grad-CAM (use relu5_4 for VGG-19 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
 cmd:option('-label',-1, 'Class label to generate grad-CAM for (-1 = use predicted class, 283 = Tiger cat, 243 = Boxer)')
+cmd:option('-save_as_heatmap', 1, '-1 = Save raw GrayScale Grad-CAM, 1 = convert Grad-CAM to  heatmap')
 
 -- Miscellaneous
 cmd:option('-seed', 123, 'Torch manual random number generator seed')
@@ -68,7 +69,7 @@ local output_gb = cnn_gb:forward(img)
 local score, pred_label = torch.max(output,1)
 
 if opt.label == -1 then 
-  print("No label provided, using predicted label ", pred_label:float())
+  print("No label provided, using predicted label ", pred_label)
   opt.label = pred_label[1]
 end
 
@@ -79,7 +80,11 @@ local doutput = utils.create_grad_input(cnn.modules[#cnn.modules], opt.label)
 local gcam = utils.grad_cam(cnn, opt.layer_name, doutput)
 gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
 local hm = utils.to_heatmap(gcam)
-image.save(opt.out_path .. 'classify_gcam_' .. opt.label .. '.png', image.toDisplayTensor(hm))
+if opt.save_as_heatmap == 1 then
+  image.save(opt.out_path .. 'classify_gcam_hm_' .. opt.label .. '.png', image.toDisplayTensor(hm))
+else
+  image.save(opt.out_path .. 'classify_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gcam))
+end
 
 -- Guided Backprop
 local gb_viz = cnn_gb:backward(img, doutput)

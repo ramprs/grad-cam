@@ -14,7 +14,8 @@ cmd:option('-backend', 'cudnn')
 -- Grad-CAM parameters
 cmd:option('-layer', 30, 'Layer to use for Grad-CAM (use 30 for relu5_3 for VGG-16 )')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
-cmd:option('-caption', 'a dog and a cat posing for a picture', 'Optional input sentence. Default ('') will use the generated sentence')
+cmd:option('-caption', 'a dog and a cat posing for a picture', 'Optional input sentence. No input will use the generated sentence as default')
+cmd:option('-save_as_heatmap', 1, '-1: save raw Grad-CAM. 1: convert Grad-CAM to heatmap')
 
 -- Captioning model parameters
 cmd:option('-model_path', 'neuraltalk2/model_id1-501-1448236541.t7', 'Path to captioning model checkpoint')
@@ -113,7 +114,11 @@ local dcnn = dlm[1]
 local gcam = utils.grad_cam(cnn, opt.layer, dcnn)
 gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
 local hm = utils.to_heatmap(gcam)
-image.save(opt.out_path .. 'caption_gcam_'  .. opt.caption .. '.png', image.toDisplayTensor(hm))
+if opt.save_as_heatmap == 1 then
+  image.save(opt.out_path .. 'vqa_gcam_hm_' .. opt.label .. '.png', image.toDisplayTensor(hm))
+else
+  image.save(opt.out_path .. 'vqa_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gcam))
+end
 
 -- Guided Backprop
 local gb_viz = cnn_gb:backward(img, dcnn)
