@@ -27,6 +27,6 @@ cd ..
 
 # neuraltalk2
 cd neuraltalk2
-wget http://cs.stanford.edu/people/karpathy/neuraltalk2/checkpoint_v1.zip
+get http://cs.stanford.edu/people/karpathy/neuraltalk2/checkpoint_v1.zip
 unzip checkpoint_v1.zip
 cd ..

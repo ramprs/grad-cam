@@ -14,7 +14,7 @@ cmd:option('-backend', 'cudnn')
 -- Grad-CAM parameters
 cmd:option('-layer', 30, 'Layer to use for Grad-CAM (use 30 for relu5_3 for VGG-16 )')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
-cmd:option('-caption', 'a dog and a cat posing for a picture', 'Input sentence. Default is the generated sentence')
+cmd:option('-caption', 'a dog and a cat posing for a picture', 'Optional input sentence. Default ('') will use the generated sentence')
 
 -- Captioning model parameters
 cmd:option('-model_path', 'neuraltalk2/model_id1-501-1448236541.t7', 'Path to captioning model checkpoint')

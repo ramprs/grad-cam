@@ -18,7 +18,7 @@ cmd:option('-backend', 'cudnn')
 cmd:option('-layer_name', 'relu5_4', 'Layer to use for Grad-CAM (use relu5_3 for VGG-16 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
 cmd:option('-question', 'What animal?', 'Input question')
-cmd:option('-answer', 'cat', 'Answer to generate Grad-CAM for')
+cmd:option('-answer', 'cat', 'Optional answer to generate Grad-CAM visualizations for. Default ('') uses the predicted answer')
 
 -- VQA model parameters
 cmd:option('-model_path', 'VQA_LSTM_CNN/lstm.t7', 'Path to VQA model checkpoint')
