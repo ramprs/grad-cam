@@ -8,9 +8,11 @@ function utils.preprocess(path, width, height)
   -- load image
   local orig_image = image.load(path)
 
-  -- if the image is grayscale, repeat the tensor
-  if orig_image:nDimension() == 2 then
+  -- handle greyscale and rgba images
+  if orig_image:size(1) == 1 then
     orig_image = orig_image:repeatTensor(3, 1, 1)
+  elseif orig_image:size(1) == 4 then
+    orig_image = orig_image[{{1,3},{},{}}]
   end
 
   -- get the dimensions of the original image
@@ -136,12 +138,13 @@ end
 function utils.sent_to_label(vocab, sent, seq_length)
   local inv_vocab = utils.table_invert(vocab)
   local labels = torch.zeros(seq_length,1)
-  local i =0
+  local i = 0
   for word in sent:gmatch'%w+' do
-    local ix_word = inv_vocab[word]
-    if ix_word == nil then print("error: word ".. word " doesn't exist in vocab")
-      break
+    -- we replace out of vocabulary words with UNK
+    if inv_vocab[word] == nil then
+        word = 'UNK'
     end
+    local ix_word = inv_vocab[word]
     i = i+1
     labels[{{i},{1}}] = ix_word
   end
