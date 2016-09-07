@@ -39,7 +39,7 @@ function utils.deconv(m)
   end
 end
 
--- Replace ReLUs with DeconvReLUs
+-- Replace ReLUs with GuidedBackpropReLUs
 function utils.guidedbackprop(m)
   require 'misc.GuidedBackpropReLU'
   local name = torch.typename(m)
