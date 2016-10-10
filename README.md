@@ -7,6 +7,8 @@ Code for the paper
 Ramprasaath R. Selvaraju, Abhishek Das, Ramakrishna Vedantam, Michael Cogswell, Devi Parikh, Dhruv Batra  
 [https://arxiv.org/abs/1610.02391][7]
 
+![](http://i.imgur.com/mEYT01n.png)[7]
+
 Demo: [gradcam.cloudcv.org][8]
 
 ![Overview](http://i.imgur.com/VTGhZZE.png)
@@ -36,6 +38,18 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 - `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1
 
 ##### Examples
+
+![](http://i.imgur.com/nTaVH57.png)
+![](http://i.imgur.com/fjZ8E3Z.png)
+![](http://i.imgur.com/RzPhOYo.png)
+
+'border collie' (243)
+
+![](http://i.imgur.com/nTaVH57.png)
+![](http://i.imgur.com/94ZMSNI.png)
+![](http://i.imgur.com/wmtUTgj.png)
+
+'tabby cat' (282)
 
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/iZuijZy.png)
