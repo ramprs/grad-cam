@@ -24,16 +24,16 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 
 ##### Options
 
-- `proto_file`: Path to the `deploy.prototxt` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_16_layers_deploy.prototxt`.
-- `model_file`: Path to the `.caffemodel` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_16_layers.caffemodel`.
-- `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`.
-- `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
-- `layer_name`: Layer to use for Grad-CAM. Default is `relu5_3` (use `relu5_4` for VGG-19 and `relu5` for AlexNet).
-- `label`: Class label to generate grad-CAM for (-1 = use predicted class, 283 = Tiger cat, 243 = Boxer). Default is -1. These correspond to ILSVRC synset IDs.
-- `out_path`: Path to save images in. Default is `output/`.
-- `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
-- `backend`: Backend to use with [loadcaffe][3]. Default is `nn`.
-- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
+- `proto_file`: Path to the `deploy.prototxt` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_16_layers_deploy.prototxt`
+- `model_file`: Path to the `.caffemodel` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_16_layers.caffemodel`
+- `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`
+- `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet)
+- `layer_name`: Layer to use for Grad-CAM. Default is `relu5_3` (use `relu5_4` for VGG-19 and `relu5` for AlexNet)
+- `label`: Class label to generate grad-CAM for (-1 = use predicted class, 283 = Tiger cat, 243 = Boxer). Default is -1. These correspond to ILSVRC synset IDs
+- `out_path`: Path to save images in. Default is `output/`
+- `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU
+- `backend`: Backend to use with [loadcaffe][3]. Default is `nn`
+- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1
 
 ##### Examples
 
@@ -61,18 +61,18 @@ th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 
 
 ##### Options
 
-- `proto_file`: Path to the `deploy.prototxt` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_19_layers_deploy.prototxt`.
-- `model_file`: Path to the `.caffemodel` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_19_layers.caffemodel`.
-- `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`.
-- `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
-- `layer_name`: Layer to use for Grad-CAM. Default is `relu5_4` (use `relu5_3` for VGG-16 and `relu5` for AlexNet).
-- `question`: Input question. Default is `What animal?`.
-- `answer`: Optional answer (For eg. "cat") to generate Grad-CAM for ('' = use predicted answer). Default is ''.
-- `out_path`: Path to save images in. Default is `output/`.
-- `model_path`: Path to VQA model checkpoint. Default is `VQA_LSTM_CNN/lstm.t7`.
-- `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
-- `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
-- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
+- `proto_file`: Path to the `deploy.prototxt` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_19_layers_deploy.prototxt`
+- `model_file`: Path to the `.caffemodel` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_19_layers.caffemodel`
+- `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`
+- `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet)
+- `layer_name`: Layer to use for Grad-CAM. Default is `relu5_4` (use `relu5_3` for VGG-16 and `relu5` for AlexNet)
+- `question`: Input question. Default is `What animal?`
+- `answer`: Optional answer (For eg. "cat") to generate Grad-CAM for ('' = use predicted answer). Default is ''
+- `out_path`: Path to save images in. Default is `output/`
+- `model_path`: Path to VQA model checkpoint. Default is `VQA_LSTM_CNN/lstm.t7`
+- `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU
+- `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`
+- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1
 
 ##### Examples
 
@@ -120,15 +120,15 @@ th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 ```
 ##### Options
 
-- `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`.
-- `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
+- `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`
+- `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet)
 - `layer`: Layer to use for Grad-CAM. Default is 30 (relu5_3 for vgg16)
-- `caption`: Optional input caption. No input will use the generated caption as default.
-- `out_path`: Path to save images in. Default is `output/`.
-- `model_path`: Path to captioning model checkpoint. Default is `neuraltalk2/model_id1-501-1448236541.t7`.
-- `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU.
-- `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
-- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
+- `caption`: Optional input caption. No input will use the generated caption as default
+- `out_path`: Path to save images in. Default is `output/`
+- `model_path`: Path to captioning model checkpoint. Default is `neuraltalk2/model_id1-501-1448236541.t7`
+- `gpuid`: 0-indexed id of GPU to use. Default is -1 = CPU
+- `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`
+- `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1
 
 ##### Examples
 
