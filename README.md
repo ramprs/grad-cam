@@ -7,7 +7,7 @@ Code for the paper
 Ramprasaath R. Selvaraju, Abhishek Das, Ramakrishna Vedantam, Michael Cogswell, Devi Parikh, Dhruv Batra  
 [https://arxiv.org/abs/1610.02391][7]
 
-![](http://i.imgur.com/mEYT01n.png)[7]
+![](http://i.imgur.com/mEYT01n.png)(https://arxiv.org/abs/1610.02391)
 
 Demo: [gradcam.cloudcv.org][8]
 
