@@ -88,13 +88,13 @@ What animal? Dog
 
 What animal? Cat
 
-![](http://i.imgur.com/CUIiOrd.png)
+![](http://i.imgur.com/Zak2NZW.png)
 ![](http://i.imgur.com/GbhRhkg.png)
 ![](http://i.imgur.com/lrAgGj0.png)
 
 What color is the fire hydrant? Green
 
-![](http://i.imgur.com/CUIiOrd.png)
+![](http://i.imgur.com/Zak2NZW.png)
 ![](http://i.imgur.com/cHzOo7k.png)
 ![](http://i.imgur.com/CJ6QiGD.png)
 
