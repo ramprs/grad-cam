@@ -89,16 +89,16 @@ What animal? Dog
 What animal? Cat
 
 ![](http://i.imgur.com/CUIiOrd.png)
-![](http://i.imgur.com/6oS8lQp.png)
-![](http://i.imgur.com/1za35Sj.png)
+![](http://i.imgur.com/GbhRhkg.png)
+![](http://i.imgur.com/lrAgGj0.png)
 
-What color is the hydrant? Yellow
+What color is the fire hydrant? Green
 
 ![](http://i.imgur.com/CUIiOrd.png)
-![](http://i.imgur.com/UY8moms.png)
-![](http://i.imgur.com/DDsMv7A.png)
+![](http://i.imgur.com/cHzOo7k.png)
+![](http://i.imgur.com/CJ6QiGD.png)
 
-What color is the hydrant? Green
+What color is the fire hydrant? Yellow
 
 #### Image Captioning
 
