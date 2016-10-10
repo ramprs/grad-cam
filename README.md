@@ -1,20 +1,28 @@
 
-# Grad-CAM: Gradient-weighted Class Activation Mapping
+## Grad-CAM: Gradient-weighted Class Activation Mapping
 
-![Overview](http://i.imgur.com/qBPR3aM.jpg)
+Code for the paper
 
-## Usage
+**[Grad-CAM: Why did you say that? Visual Explanations from Deep Networks via Gradient-based Localization][7]**  
+Ramprasaath R. Selvaraju, Abhishek Das, Ramakrishna Vedantam, Michael Cogswell, Devi Parikh, Dhruv Batra  
+[https://arxiv.org/abs/1610.02391][7]
+
+Demo: [gradcam.cloudcv.org][8]
+
+![Overview](http://i.imgur.com/VTGhZZE.png)
+
+### Usage
 
 Download Caffe model(s) and prototxt for VGG-16/VGG-19/AlexNet using `sh models/download_models.sh`.
 
-### Classification
+#### Classification
 
 ```
 th classification.lua -input_image_path images/cat_dog.jpg -label 243 -gpuid 0
 th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 ```
 
-#### Options
+##### Options
 
 - `proto_file`: Path to the `deploy.prototxt` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_16_layers_deploy.prototxt`.
 - `model_file`: Path to the `.caffemodel` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_16_layers.caffemodel`.
@@ -27,7 +35,7 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 - `backend`: Backend to use with [loadcaffe][3]. Default is `nn`.
 - `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
 
-#### Examples
+##### Examples
 
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/iZuijZy.png)
@@ -41,7 +49,7 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 
 'tiger cat' (283)
 
-### Visual Question Answering
+#### Visual Question Answering
 
 Clone the [VQA][5] ([http://arxiv.org/abs/1505.00468][4]) sub-repository (`git submodule init && git submodule update`), and download and unzip the provided extracted features and pretrained model.
 
@@ -51,7 +59,7 @@ th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 
 
 ```
 
-#### Options
+##### Options
 
 - `proto_file`: Path to the `deploy.prototxt` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_19_layers_deploy.prototxt`.
 - `model_file`: Path to the `.caffemodel` file for the CNN Caffe model. Default is `models/VGG_ILSVRC_19_layers.caffemodel`.
@@ -66,7 +74,7 @@ th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 
 - `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
 - `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
 
-#### Examples
+##### Examples
 
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/QBTstax.png)
@@ -92,7 +100,7 @@ What color is the hydrant? Yellow
 
 What color is the hydrant? Green
 
-### Image Captioning
+#### Image Captioning
 
 Clone the [neuraltalk2][6] sub-repository. Running `sh models/download_models.sh` will download the pretrained model and place it in the neuraltalk2 folder.
 
@@ -110,7 +118,7 @@ th captioning.lua -input_image_path images/cat_dog.jpg -caption 'a dog and cat p
 th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 
 ```
-#### Options
+##### Options
 
 - `input_image_path`: Path to the input image. Default is `images/cat_dog.jpg`.
 - `input_sz`: Input image size. Default is 224 (Change to 227 if using AlexNet).
@@ -122,7 +130,7 @@ th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 - `backend`: Backend to use with [loadcaffe][3]. Default is `cudnn`.
 - `save_as_heatmap`: Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM. Default is 1.
 
-#### Examples
+##### Examples
 
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/TiKdMMw.png)
@@ -136,11 +144,11 @@ a dog and cat posing for a picture
 
 a bathroom with a toilet and a sink
 
-## License
+### License
 
 BSD
 
-### 3rd-party
+#### 3rd-party
 
 - [VQA_LSTM_CNN][5], BSD
 - [neuraltalk2][6], BSD
@@ -149,3 +157,11 @@ BSD
 [4]: http://arxiv.org/abs/1505.00468
 [5]: https://github.com/VT-vision-lab/VQA_LSTM_CNN
 [6]: https://github.com/karpathy/neuraltalk2 
+[7]: https://arxiv.org/abs/1610.02391
+[8]: http://gradcam.cloudcv.org/
+[9]: https://ramprs.github.io/
+[10]: http://abhishekdas.com/
+[11]: http://vrama91.github.io/
+[12]: http://mcogswell.io/
+[13]: https://computing.ece.vt.edu/~parikh/
+[14]: https://computing.ece.vt.edu/~dbatra/
