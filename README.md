@@ -39,7 +39,7 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 
 ##### Examples
 
-'border collie' (243)
+'border collie' (233)
 
 ![](http://i.imgur.com/nTaVH57.png)
 ![](http://i.imgur.com/fjZ8E3Z.png)
