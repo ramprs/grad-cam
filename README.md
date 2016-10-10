@@ -39,29 +39,29 @@ th classification.lua -input_image_path images/cat_dog.jpg -label 283 -gpuid 0
 
 ##### Examples
 
+'border collie' (243)
+
 ![](http://i.imgur.com/nTaVH57.png)
 ![](http://i.imgur.com/fjZ8E3Z.png)
 ![](http://i.imgur.com/RzPhOYo.png)
 
-'border collie' (243)
+'tabby cat' (282)
 
 ![](http://i.imgur.com/nTaVH57.png)
 ![](http://i.imgur.com/94ZMSNI.png)
 ![](http://i.imgur.com/wmtUTgj.png)
 
-'tabby cat' (282)
+'boxer' (243)
 
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/iZuijZy.png)
 ![](http://i.imgur.com/o7RStQm.png)
 
-'boxer' (243)
+'tiger cat' (283)
 
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/NzXRy5E.png)
 ![](http://i.imgur.com/fP0Dd87.png)
-
-'tiger cat' (283)
 
 #### Visual Question Answering
 
@@ -90,29 +90,41 @@ th visual_question_answering.lua -input_image_path images/cat_dog.jpg -question 
 
 ##### Examples
 
+What animal? Dog
+
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/QBTstax.png)
 ![](http://i.imgur.com/NRyhfdL.png)
 
-What animal? Dog
+What animal? Cat
 
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/hqBWRAm.png)
 ![](http://i.imgur.com/lwj5oAX.png)
 
-What animal? Cat
+What color is the fire hydrant? Green
 
 ![](http://i.imgur.com/Zak2NZW.png)
 ![](http://i.imgur.com/GbhRhkg.png)
 ![](http://i.imgur.com/lrAgGj0.png)
 
-What color is the fire hydrant? Green
+What color is the fire hydrant? Yellow
 
 ![](http://i.imgur.com/Zak2NZW.png)
 ![](http://i.imgur.com/cHzOo7k.png)
 ![](http://i.imgur.com/CJ6QiGD.png)
 
-What color is the fire hydrant? Yellow
+What color is the fire hydrant? Green and Yellow
+
+![](http://i.imgur.com/Zak2NZW.png)
+![](http://i.imgur.com/i7AwHXx.png)
+![](http://i.imgur.com/7N6BVgq.png)
+
+What color is the fire hydrant? Red and Yellow
+
+![](http://i.imgur.com/Zak2NZW.png)
+![](http://i.imgur.com/uISYeOR.png)
+![](http://i.imgur.com/ebZVlTI.png)
 
 #### Image Captioning
 
@@ -146,17 +158,17 @@ th captioning.lua -input_image_path images/cat_dog.jpg -caption '' -gpuid 0
 
 ##### Examples
 
+a dog and cat posing for a picture
+
 ![](http://i.imgur.com/OAoSQYT.png)
 ![](http://i.imgur.com/TiKdMMw.png)
 ![](http://i.imgur.com/GSQeR2M.png)
 
-a dog and cat posing for a picture
+a bathroom with a toilet and a sink
 
 ![](http://i.imgur.com/gE6VXql.png)
 ![](http://i.imgur.com/K3E9TWS.png)
 ![](http://i.imgur.com/em2oHRy.png)
-
-a bathroom with a toilet and a sink
 
 ### License
 
