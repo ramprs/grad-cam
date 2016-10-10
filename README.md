@@ -8,11 +8,11 @@ Ramprasaath R. Selvaraju, Abhishek Das, Ramakrishna Vedantam, Michael Cogswell, 
 [https://arxiv.org/abs/1610.02391][7]
 
 
-![](http://i.imgur.com/mEYT01n.png)(https://arxiv.org/abs/1610.02391)
+![](http://i.imgur.com/mEYT01n.png)
 
 Demo: [gradcam.cloudcv.org][8]
 
-![Overview](http://i.imgur.com/VTGhZZE.png)
+![Overview](http://i.imgur.com/TV1G3NP.png)
 
 ### Usage
 
