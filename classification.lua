@@ -30,7 +30,7 @@ opt = cmd:parse(arg or {})
 print(opt)
 
 torch.manualSeed(opt.seed)
-torch.setdefaulttensortype('torch.DoubleTensor')
+torch.setdefaulttensortype('torch.FloatTensor')
 lfs.mkdir(opt.out_path)
 
 if opt.gpuid >= 0 then
@@ -59,6 +59,8 @@ if opt.gpuid >= 0 then
   cnn:cuda()
   cnn_gb:cuda()
   img = img:cuda()
+else
+  img = img:float()
 end
 
 -- Forward pass
