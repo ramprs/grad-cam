@@ -63,7 +63,7 @@ end
 lm:evaluate()
 cnn:evaluate()
 
-local img = utils.preprocess(opt.input_image_path, opt.input_sz, opt.input_sz)
+local img = utils.preprocess(opt.input_image_path, opt.input_sz, opt.input_sz):float()
 
 -- Clone & replace ReLUs for Guided Backprop
 local cnn_gb = cnn:clone()
