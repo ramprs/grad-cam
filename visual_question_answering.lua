@@ -12,7 +12,7 @@ cmd:text('Options')
 cmd:option('-proto_file', 'models/VGG_ILSVRC_19_layers_deploy.prototxt')
 cmd:option('-model_file', 'models/VGG_ILSVRC_19_layers.caffemodel')
 cmd:option('-input_sz', 224, 'Input image dimensions (use 227 for AlexNet)')
-cmd:option('-backend', 'cudnn')
+cmd:option('-backend', 'nn')
 
 -- Grad-CAM parameters
 cmd:option('-layer_name', 'relu5_4', 'Layer to use for Grad-CAM (use relu5_3 for VGG-16 and relu5 for AlexNet)')
@@ -39,7 +39,7 @@ opt = cmd:parse(arg or {})
 print(opt)
 
 torch.manualSeed(opt.seed)
-torch.setdefaulttensortype('torch.FloatTensor')
+torch.setdefaulttensortype('torch.DoubleTensor')
 lfs.mkdir(opt.out_path)
 
 if opt.gpuid >= 0 then
@@ -154,6 +154,8 @@ if opt.gpuid >= 0 then
   fv_sorted_q[1] = fv_sorted_q[1]:cuda()
   fv_sorted_q[3] = fv_sorted_q[3]:cuda()
   fv_sorted_q[4] = fv_sorted_q[4]:cuda()
+else
+    fv_sorted_q[1] = fv_sorted_q[1]:double()
 end
 
 local question_max_length = fv_sorted_q[2]:size(1)
