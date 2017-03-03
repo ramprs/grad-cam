@@ -17,6 +17,7 @@ cmd:option('-backend', 'nn')
 -- Grad-CAM parameters
 cmd:option('-layer_name', 'relu5_3', 'Layer to use for Grad-CAM (use relu5_4 for VGG-19 and relu5 for AlexNet)')
 cmd:option('-input_image_path', 'images/cat_dog.jpg', 'Input image path')
+cmd:option('-output_image_name', '', 'Output image name')
 cmd:option('-label',-1, 'Class label to generate grad-CAM for (-1 = use predicted class, 283 = Tiger cat, 243 = Boxer)')
 cmd:option('-save_as_heatmap', 1, 'Whether to save heatmap or raw Grad-CAM. 1 = save heatmap, 0 = save raw Grad-CAM.')
 
@@ -82,18 +83,23 @@ local doutput = utils.create_grad_input(cnn.modules[#cnn.modules], opt.label)
 local gcam = utils.grad_cam(cnn, opt.layer_name, doutput)
 gcam = image.scale(gcam:float(), opt.input_sz, opt.input_sz)
 local hm = utils.to_heatmap(gcam)
+
+if opt.output_image_name == "" then
+  opt.output_image_name = opt.label
+end
+
 if opt.save_as_heatmap == 1 then
-  image.save(opt.out_path .. 'classify_gcam_hm_' .. opt.label .. '.png', image.toDisplayTensor(hm))
+  image.save(opt.out_path .. 'classify_gcam_hm_' .. opt.output_image_name .. '.png', image.toDisplayTensor(hm))
 else
-  image.save(opt.out_path .. 'classify_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gcam))
+  image.save(opt.out_path .. 'classify_gcam_' .. opt.output_image_name .. '.png', image.toDisplayTensor(gcam))
 end
 
 -- Guided Backprop
 local gb_viz = cnn_gb:backward(img, doutput)
 -- BGR to RGB
 gb_viz = gb_viz:index(1, torch.LongTensor{3, 2, 1})
-image.save(opt.out_path .. 'classify_gb_' .. opt.label .. '.png', image.toDisplayTensor(gb_viz))
+image.save(opt.out_path .. 'classify_gb_' .. opt.output_image_name .. '.png', image.toDisplayTensor(gb_viz))
 
 -- Guided Grad-CAM
 local gb_gcam = gb_viz:float():cmul(gcam:expandAs(gb_viz))
-image.save(opt.out_path .. 'classify_gb_gcam_' .. opt.label .. '.png', image.toDisplayTensor(gb_gcam))
+image.save(opt.out_path .. 'classify_gb_gcam_' .. opt.output_image_name .. '.png', image.toDisplayTensor(gb_gcam))
