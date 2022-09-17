@@ -190,3 +190,11 @@ BSD
 [12]: http://mcogswell.io/
 [13]: https://computing.ece.vt.edu/~parikh/
 [14]: https://computing.ece.vt.edu/~dbatra/
+
+#### Video Tutorials(Chinese)
+
+1.Grad-CAM algorithm quick view: https://www.bilibili.com/video/BV1PD4y1B77q
+
+2.CAM paper reading sentence by sentence: https://www.bilibili.com/video/BV1id4y167FF
+
+3.Explainable AI series: https://space.bilibili.com/1900783/channel/collectiondetail?sid=713364
